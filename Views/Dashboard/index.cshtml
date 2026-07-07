@@ -1,0 +1,20 @@
+@model List<WebApplication1.Models.Application>
+
+<h1>My Applications</h1>
+
+@foreach(var app in Model)
+{
+    <div>
+
+        <p>Company: @app.Company</p>
+
+        <p>Position: @app.Position</p>
+
+        <p>Status: @app.Status</p>
+
+        <p>AppliedDate: @app.AppliedDate</p>
+
+        <hr/>
+
+    </div>
+}

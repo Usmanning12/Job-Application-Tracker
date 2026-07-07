@@ -1,0 +1,60 @@
+@model IEnumerable<WebApplication1.Models.Application>
+@using WebApplication1.Models
+<h1>Job Applications</h1>
+
+<form method="get" class="mb-3">
+    <input type="text" name="searchString" placeholder="Search company..." />
+
+    <select name="statusFilter">
+        <option value="">All Statuses</option>
+        @foreach (var status in Enum.GetValues(typeof(ApplicationStatus)))
+        {
+            <option value="@status">@status</option>
+        }
+    </select>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<a asp-action="Create" class="btn btn-primary">
+   Add New Application
+</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Status</th>
+        <th>Applied Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model.Any())
+    {
+        foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.Company</td>
+                <td>@app.Position</td>
+                <td>@app.Status</td>
+                <td>@app.AppliedDate</td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@app.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@app.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@app.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">No applications yet.</td>
+        </tr>
+    }
+    </tbody>
+</table>

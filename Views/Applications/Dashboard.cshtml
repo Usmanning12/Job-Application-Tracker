@@ -1,0 +1,43 @@
+<canvas id="statusChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+    const values = @Html.Raw(Json.Serialize(ViewBag.ChartValues));
+
+    const total = values.reduce((a, b) => a + b, 0);
+
+    const colors = [
+        "#4CAF50", // Applied - green
+        "#2196F3", // Interviewing - blue
+        "#FF9800", // Offer - orange
+        "#F44336"  // Rejected - red
+    ];
+
+    const ctx = document.getElementById('statusChart');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.raw;
+                            let percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${percentage}% (${value})`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,43 @@
+@model WebApplication1.Models.Application
+
+@{
+    ViewData["Title"] = "Edit Application";
+}
+
+<h2>Edit Application</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Company"></label>
+        <input asp-for="Company" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Position"></label>
+        <input asp-for="Position" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control">
+            <option>Applied</option>
+            <option>Under Review</option>
+            <option>Interviewing</option>
+            <option>Offer</option>
+            <option>Rejected</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AppliedDate"></label>
+        <input asp-for="AppliedDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
