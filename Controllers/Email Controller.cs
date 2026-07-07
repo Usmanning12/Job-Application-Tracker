@@ -33,11 +33,10 @@ public class EmailController : Controller
             Console.WriteLine($"UTC: {DateTime.UtcNow}");
             Console.WriteLine($"Kind: {DateTime.Now.Kind}");
 
-            app.Status = ApplicationStatus.Applied;
             app.AppliedDate = DateTime.Now;
 
             Console.WriteLine($"AppliedDate: {app.AppliedDate}");
-
+            
             _context.Applications.Add(app);
         }
 
