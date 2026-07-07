@@ -29,9 +29,16 @@ public class EmailController : Controller
             Console.WriteLine($"Position: {app.Position}");
 
             // FIX: use correct variable name
+            Console.WriteLine($"Now: {DateTime.Now}");
+            Console.WriteLine($"UTC: {DateTime.UtcNow}");
+            Console.WriteLine($"Kind: {DateTime.Now.Kind}");
+
             app.Status = ApplicationStatus.Applied;
             app.AppliedDate = DateTime.Now;
 
+            Console.WriteLine($"AppliedDate: {app.AppliedDate}");
+
+            _context.Applications.Add(app);
             _context.Applications.Add(app);
         }
 
