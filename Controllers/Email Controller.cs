@@ -39,7 +39,6 @@ public class EmailController : Controller
             Console.WriteLine($"AppliedDate: {app.AppliedDate}");
 
             _context.Applications.Add(app);
-            _context.Applications.Add(app);
         }
 
         _context.SaveChanges();
